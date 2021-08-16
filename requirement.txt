@@ -1,0 +1,10 @@
+numpy
+matplotlib
+pandas
+astropy
+os
+sys
+datetime
+torch
+torchvision
+seaborn
