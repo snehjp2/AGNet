@@ -8,3 +8,7 @@ datetime
 torch
 torchvision
 seaborn
+sklearn
+scipy
+pickle
+tqdm
