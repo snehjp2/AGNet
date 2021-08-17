@@ -16,6 +16,8 @@ To install dependencies, simply run:
 
 or consult online documentation for appropriate dependencies.
 
+The pipeline presented here is an improvement upon that presented in our previous paper, [Weighing Black Holes with Machine Learning](https://arxiv.org/abs/2011.15095).
+
 # Data
 
 1. SDSS Stripe 82 light curves: http://faculty.washington.edu/ivezic/macleod/qso_dr7/Southern.html
@@ -45,7 +47,7 @@ Match Stripe 82 light curve PSF magnitudes with DR14 catalog for FNN pipeline.  
 Get SDSS Stripe 82 light curves (UWashington) and clean it. Generate a .csv file of cleaned data (data in a desirable format). RA/DEC used to match light curves with DR7/DR14 catalogs.
 
 `src/scripts/data_matching.py`:
-To match the Stripe 82 (UWashington) and the DR7 catalog data to get most relevant information. Generate a .csv file of matched data. 
+To match the Stripe 82 (UWashington) and the DR7 catalog data to get most relevant information. Generate a .csv file of matched data.
 
 `src/scripts/light_curve_to_image_tutorial.py`: Convert SDSS Stripe 82 light curves to images as .npy files.
 
