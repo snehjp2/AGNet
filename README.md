@@ -45,7 +45,7 @@ Match Stripe 82 light curve PSF magnitudes with DR14 catalog for FNN pipeline.  
 Get SDSS Stripe 82 light curves (UWashington) and clean it. Generate a .csv file of cleaned data (data in a desirable format). RA/DEC used to match light curves with DR7/DR14 catalogs.
 
 `src/scripts/data_matching.py`:
-To match the Stripe 82 (UWashington) and the DR7 catalog data to get most relevant information. Generate a .csv file of matched data.
+To match the Stripe 82 (UWashington) and the DR7 catalog data to get most relevant information. Generate a .csv file of matched data. 
 
 `src/scripts/light_curve_to_image_tutorial.py`: Convert SDSS Stripe 82 light curves to images as .npy files.
 
