@@ -1,4 +1,8 @@
-import torch
+"""
+Training script for the light curve encoder.
+The network takes in light curves images and build encoded
+representation, which will be further utilize in AGNet.
+"""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
