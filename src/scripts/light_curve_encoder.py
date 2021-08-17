@@ -75,40 +75,19 @@ class BHDataset(Dataset): # torch.utils.data.Dataset
         z_u = self.df['z-u'].iloc[[index]]
         tau = self.df['tau'].iloc[[index]]
         sigma = self.df['sigma'].iloc[[index]]
-        #print("ID:", ID.values[0])
-        #print("redshift:", z)
+
         img_path = "/media/joshua/Milano/Efficient_Full_train" + '/LC_images_' + str(ID.values[0]) + '.npy'
         img = np.load(img_path)
         image = np.zeros((3, 224, 224))
         for i in range(3):
             image[i, :, :] += img
 
-        # img = np.load(img_path)
-        #
-        # ### renormalize
-        #
-        #
-        # img[:, :, 0] -= img[:, :, 0].mean()
-        # img[:, :, 1] -= img[:, :, 1].mean()
-        # img[:, :, 2] -= img[:, :, 2].mean()
-        #
-        #
-        # img[:, :, 0] /= img[:, :, 0].std()
-        # img[:, :, 1] /= img[:, :, 1].std()
-        # img[:, :, 2] /= img[:, :, 2].std()
-        #
-        #
-        # #print("img", img.shape)
-        # img = img.repeat(40, axis=0).repeat(1, axis=1).repeat(1, axis=2)
-        # #print("new img", img.shape)
-        # image = np.zeros((3, 224, 224))
-        # for i in range(3):
-        #     image[i, :200, :img.shape[1]] += img[:,:, i]
+
         return image, M.values, z.values
 
     def __len__(self):
         return self.df.shape[0]
-        #return self.length
+
 
 
 train_loader = torch.utils.data.DataLoader(BHDataset(folder, train=True, transform=data_transform, target_transform=target_transform),
@@ -120,24 +99,9 @@ if __name__ == '__main__':
     dset_classes_number = 1
     net = models.resnet18(pretrained=True)
     num_ftrs = net.fc.in_features
-    # net.fc1 = nn.Linear(num_ftrs, 10)
-    # net.fc2 = nn.Linear(10, dset_classes_number)
     net.fc = nn.Sequential(
     nn.Linear(num_ftrs, 10),
     nn.Linear(10, dset_classes_number))
-    #net.fc = nn.Sequential(
-    # nn.Dropout(0.5),
-    # nn.Linear(num_ftrs, 10),
-    # nn.Linear(10, dset_classes_number))
-    #net.fc= nn.Linear(in_features=num_ftrs, out_features=dset_classes_number)
-
-    #loaded_model_path = './saved_model/redshift_resnet18.mdl'
-	#save_model_path = './saved_model/'
-    #if not os.path.exists(save_model_path):
-	#os.mkdir(save_model_path)
-    #if os.path.exists(loaded_model_path):
-    #    net = torch.load(loaded_model_path)
-    #    print('loaded mdl！')
     loss_fn = nn.MSELoss(reduction='mean')
 
     net.cuda()
