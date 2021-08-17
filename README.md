@@ -6,7 +6,7 @@ The goal of this project is to introduce a new, interdisciplinary method in weig
 ![Example AGN light curve](src/lightcurve.png)
 
 # Abstract
-Supermassive black holes (SMBHs) are ubiquitously found at the centers of most massive galaxies. Measuring SMBH mass is important for understanding the origin and evolution of SMBHs. However, traditional methods require spectroscopic data which is expensive to gather. We present an algorithm that weighs SMBHs using quasar light time series, circumventing the need for expensive spectra. We train, validate, and test neural networks that directly learn from the Sloan Digital Sky Survey (SDSS) Stripe 82 light curves for a sample of $38,939$ spectroscopically confirmed quasars to map out the nonlinear encoding between SMBH mass and multi-color optical light curves. We find a 1&sigma; scatter of 0.37 dex between the predicted SMBH mass and the fiducial virial mass estimate based on SDSS single-epoch spectra, which is comparable to the systematic uncertainty in the virial mass estimate. Our results have direct implications for more efficient applications with future observations from the Vera C. Rubin Observatory.
+Supermassive black holes (SMBHs) are ubiquitously found at the centers of most massive galaxies. Measuring SMBH mass is important for understanding the origin and evolution of SMBHs. However, traditional methods require spectroscopic data which is expensive to gather. We present an algorithm that weighs SMBHs using quasar light time series, circumventing the need for expensive spectra. We train, validate, and test neural networks that directly learn from the Sloan Digital Sky Survey (SDSS) Stripe 82 light curves for a sample of 38,939 spectroscopically confirmed quasars to map out the nonlinear encoding between SMBH mass and multi-color optical light curves. We find a 1&sigma; scatter of 0.37 dex between the predicted SMBH mass and the fiducial virial mass estimate based on SDSS single-epoch spectra, which is comparable to the systematic uncertainty in the virial mass estimate. Our results have direct implications for more efficient applications with future observations from the Vera C. Rubin Observatory.
 
 This project is developed for Python3.5 interpreter on linux machine. Using Anaconda virtual environment is recommended.
 
@@ -52,6 +52,6 @@ To match the Stripe 82 (UWashington) and the DR7 catalog data to get most releva
 
 ### Deep learning
 
-`src/notebooks/AGNet_FNN.py`: feedforward neural network.
+`src/notebooks/AGNet_mass.py`: Hybrid neural network (CNN + FNN) that takes inputs from encoded images and preprocessed features.
 
-`src/scripts/neural_network.py` : Convolutional neural network.
+`src/scripts/light_curve_encoder.py` : CNN that functions as an encoder to learn information from the light curve image and outputs features.
