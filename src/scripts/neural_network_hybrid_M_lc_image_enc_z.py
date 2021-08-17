@@ -1,4 +1,7 @@
-import torch
+"""
+training script for the AGNet - a hybrid combination with conv nets and multi-layer preception.
+The network takes in features and light curves image and output AGN mass estimation.
+"""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
