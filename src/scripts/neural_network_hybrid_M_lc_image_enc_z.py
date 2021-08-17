@@ -40,16 +40,10 @@ class MLP(nn.Module):
         self.fc4 = nn.Linear(h_dim3, h_dim4)
         self.fc5 = nn.Linear(h_dim4, h_dim5)
         self.fc51 = nn.Linear(h_dim5, z_dim)
-        # self.fc32 = nn.Linear(h_dim2, z_dim)
-        # # decoder part
-        # self.fc4 = nn.Linear(z_dim, h_dim2)
-        # self.fc5 = nn.Linear(h_dim2, h_dim1)
-        # self.fc6 = nn.Linear(h_dim1, x_dim)
         self.lrelu = nn.LeakyReLU(0.01, True)
 
     def encoder(self, x):
-        # h = F.relu(self.fc1(x))
-        # h = F.relu(self.fc2(h))
+
         h = self.lrelu(self.fc1(x))
         h = self.lrelu(self.fc2(h))
         h = self.lrelu(self.fc3(h))
@@ -151,10 +145,6 @@ class BHDataset(Dataset): # torch.utils.data.Dataset
         sigma = self.df['sigma'].iloc[[index]]
 
 
-        #print("ID:", ID.values[0])
-        #print("redshift:", z)
-        #features = np.array(u_band.val)
-
         ################################
         img_path = self.image_path + 'LC_images_' + str(ID.values[0]) + '.npy'
         img = np.load(img_path)
@@ -179,31 +169,9 @@ class BHDataset(Dataset): # torch.utils.data.Dataset
 
 
         hidden_representation = net.fc[0](x)
-        #print("hidden_representation", hidden_representation[0].data.cpu().numpy())
-        # for layer in net.fc:
-        #     x = layer(x)
-        #     print("hidden_representation", x.shape)
 
         ################################
 
-        ### renormalize
-
-
-        # img[:, :, 0] -= img[:, :, 0].mean()
-        # img[:, :, 1] -= img[:, :, 1].mean()
-        # img[:, :, 2] -= img[:, :, 2].mean()
-        #
-        #
-        # img[:, :, 0] /= img[:, :, 0].std()
-        # img[:, :, 1] /= img[:, :, 1].std()
-        # img[:, :, 2] /= img[:, :, 2].std()
-
-
-        # print("std", img[:, :, 0].std(), img[:, :, 1].std(), img[:, :, 2].std())
-        # print("mean", img[:, :, 0].mean(), img[:, :, 1].mean(), img[:, :, 2].mean())
-
-        #img = img.flatten()
-        #print(img.shape)
         features = np.zeros(29)
         features[0] = (u_band.values - self.df_u_band_m) / self.df_u_band_s
         features[1] = (g_band.values - self.df_g_band_m) / self.df_g_band_s
@@ -226,27 +194,14 @@ class BHDataset(Dataset): # torch.utils.data.Dataset
         features[18] = (sigma.values - self.sigma_m ) / self.sigma_s
         features[19:] = np.tanh(hidden_representation[0].data.cpu().numpy())
 
-        ### renormalize
-
-        # features[:5] -= features[:5].mean()
-        # features[5:10] -= features[5:10].mean()
-        # features[10:] -= features[10:].mean()
-        #
-        # features[:5] /= features[:5].std()
-        # features[5:10] /= features[5:10].std()
-        # features[10:15] /= features[10:15].std()
 
 
-        #print("features", features)
 
-        # image = np.zeros((3, 224, 224))
-        # for i in range(3):
-        #     image[i, :5, :img.shape[1]] += img[:,:, i]
         return features, M.values, z.values
 
     def __len__(self):
         return self.df.shape[0]
-        #return self.length
+
 
 
 train_loader = torch.utils.data.DataLoader(BHDataset(folder, image_path, encoder_net_path, train=True, transform=data_transform, target_transform=target_transform),
@@ -267,10 +222,6 @@ if __name__ == '__main__':
     best_accuracy = float("inf")
     model_number = 1
 
-
-    #if os.path.exists('./saved_model/resnet18.mdl'):
-        #net = torch.load('./saved_model/resnet18.mdl')
-        #print('loaded mdl!')
 
     for epoch in range(EPOCH):
 
