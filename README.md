@@ -52,7 +52,7 @@ To match the Stripe 82 (UWashington) and the DR7 catalog data to get most releva
 `src/scripts/light_curve_to_image_tutorial.py`: Convert SDSS Stripe 82 light curves to images as .npy files.
 
 
-### Deep learning
+### Deep Learning
 
 `src/notebooks/AGNet_mass.py`: Hybrid neural network (CNN + FNN) that takes inputs from encoded images and preprocessed features.
 
